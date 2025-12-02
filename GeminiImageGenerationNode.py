@@ -45,7 +45,7 @@ class GeminiImageGenerator:
                 "prompt": ("STRING", {"multiline": True, "default": "A cute cartoon animal in a forest landscape"}),
                 "model": (image_models, {"default": default_model}),
                 "aspect_ratio": (["1:1", "3:4", "4:3", "9:16", "16:9"], {"default": "1:1"}),
-                "image_size": (["1K", "2K"], {"default": "1K"}),
+                "image_size": (["1K", "2K", "4K"], {"default": "1K"}),
                 "file_prefix": ("STRING", {"default": "gemini_image"}),
             },
             "optional": {

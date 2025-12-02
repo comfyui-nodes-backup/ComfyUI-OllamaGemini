@@ -45,6 +45,55 @@ def apply_prompt_template(prompt, prompt_structure="Custom"):
 
         "FLUX.1-dev": "As an elite text-to-image prompt engineer, craft an exceptional FLUX.1-dev prompt from my description. Create a hyper-detailed, cinematographic paragraph that includes: (1) precise subject characterization with emotional undertones, (2) specific artistic influences from legendary painters/photographers, (3) technical camera specifications (lens, aperture, perspective), (4) sophisticated lighting setup with exact quality and direction, (5) atmospheric elements and depth effects, (6) composition techniques, and (7) post-processing styles. Use language that balances technical precision with artistic vision. Return ONLY the prompt text itself - no explanations or formatting no more 200 tokens.",
 
+        "FLUX.2-dev": (
+            "As a FLUX.2-dev prompt specialist, craft an optimized prompt following the official BFL prompting guide. "
+            "IMPORTANT: FLUX.2 does NOT support negative prompts - describe only what you want, not what to avoid. "
+            "Structure using: Subject + Action + Style + Context (priority order - most important elements first). "
+            "(1) SUBJECT: Main focus with precise details - who/what is in the image with specific attributes. "
+            "(2) ACTION/POSE: What the subject is doing or their positioning. "
+            "(3) STYLE: Artistic approach using specific references - for photorealism specify camera model, lens (e.g., 'shot on Sony A7IV, 85mm f/1.8'), film stock (e.g., 'Kodak Portra 400'), or era style ('80s vintage photo', '2000s digicam'). "
+            "(4) CONTEXT: Setting, lighting conditions (golden hour, studio lighting, Rembrandt lighting), time of day, mood, and atmospheric conditions. "
+            "(5) TECHNICAL: Camera angle, depth of field, composition (rule of thirds), and quality descriptors. "
+            "(6) TEXT (if needed): Use quotation marks for text, specify placement ('top-right corner'), style ('bold serif', 'neon letters'), and color (use hex codes like '#FF5733' for precision). "
+            "Keep prompt 30-80 words for optimal results. Put most important elements first. "
+            "For hex colors, associate them with specific objects: 'The vase has color #02eb3c'. "
+            "Return ONLY the prompt text itself - no explanations, no negative prompts, under 200 tokens."
+        ),
+
+        "FLUX.2-dev-Edit": (
+            "As a FLUX.2-dev image editing specialist, craft precise editing instructions following the official BFL guide for multi-reference editing. "
+            "FLUX.2 combines generation and editing in one model with up to 10 reference images. "
+            "Structure your editing prompt: "
+            "(1) ACTION: Clear verb describing the change (replace, add, remove, modify, transform, combine, style-transfer). "
+            "(2) TARGET: Specific element to edit using descriptive language (the blue ceramic vase, the person in red jacket). "
+            "(3) RESULT: Detailed description of desired outcome with visual specifics. "
+            "(4) PRESERVATION: What should remain unchanged (keep the background lighting, maintain facial features, preserve the original composition). "
+            "(5) STYLE MATCHING: Ensure edits blend with original - match lighting, perspective, color palette, and artistic style. "
+            "(6) INTEGRATION: Describe how new elements should relate spatially and stylistically to existing content. "
+            "For character/product consistency across images, maintain detailed descriptions in every prompt. "
+            "For text changes: use quotes for new text, specify typography preservation. "
+            "For color precision: use hex codes associated with specific elements. "
+            "Keep instructions conversational and descriptive - FLUX.2 understands context. "
+            "Return ONLY the editing instruction, under 100 tokens."
+        ),
+
+        "FLUX.2-dev-JSON": (
+            "Create a structured JSON prompt optimized for FLUX.2-dev complex scenes. "
+            "Use this schema for precise control: "
+            '{"scene": "overall description", '
+            '"subjects": [{"description": "detailed subject", "position": "where in frame", "action": "what doing", "color_palette": ["colors"]}], '
+            '"style": "artistic style with camera/film references", '
+            '"color_palette": ["#hex1", "#hex2"], '
+            '"lighting": "specific lighting setup", '
+            '"mood": "emotional tone", '
+            '"background": "background details", '
+            '"composition": "framing technique", '
+            '"camera": {"angle": "angle", "lens": "lens mm", "f-number": "aperture", "focus": "focus behavior"}}. '
+            "Associate hex colors with specific objects. Include camera model and lens for photorealism. "
+            "For typography: add text field with content in quotes, placement, and style. "
+            "Return ONLY valid JSON - no explanations."
+        ),
+
         "SDXL": "Create a premium comma-separated tag prompt for SDXL based on my description. Structure the prompt with these elements in order of importance: (1) main subject with precise descriptors, (2) high-impact artistic medium (oil painting, digital art, photography, etc.), (3) specific art movement or style with named influences, (4) professional lighting terminology (rembrandt, cinematic, golden hour, etc.), (5) detailed environment/setting, (6) exact camera specifications (35mm, telephoto, macro, etc.), (7) composition techniques, (8) color palette/mood, and (9) post-processing effects. Use 20-30 tags maximum, prioritizing quality descriptors over quantity. Include 2-3 relevant artist references whose style matches the desired aesthetic. Return ONLY the comma-separated tags without explanations or formatting.",
 
         "FLUXKontext": "Generate precise Flux Kontext editing instructions using this complete framework: (1) clear action verbs (change, add, remove, replace, transform, modify) with specific target objects and spatial identifiers, (2) detailed modification specs with quantified values (percentages, measurements, exact colors), (3) character consistency protection using 'while maintaining exact same character/facial features/identity' - critical for character preservation, (4) multi-layered preservation clauses for composition/lighting/atmosphere/positioning, (5) specific descriptors avoiding all pronouns - use detailed physical attributes, (6) precise style names with medium characteristics and cultural context, (7) quoted text replacements with typography preservation, (8) semantic relationship maintenance for natural blending, (9) context-aware modifications that understand whole image content. Focus on descriptive language over complex formatting. Ensure edits blend seamlessly with existing content through contextual understanding. Return ONLY the Flux Kontext instruction no more 50 words.",
@@ -72,6 +121,52 @@ def apply_prompt_template(prompt, prompt_structure="Custom"):
             "Structure as conversational instructions under 75 words that feel like natural directions to an artist who can see and understand the full image context. "
             "Avoid technical jargon and focus on descriptive, intuitive language that leverages Gemini's contextual understanding. "
             "Return ONLY the editing instruction text."
+        ),
+
+        "NanaBananaPro": (
+            "As a Nano Banana Pro (Gemini 3 Pro Image) prompt specialist, craft an optimized text-to-image prompt following official Google prompting guidelines. "
+            "CORE PRINCIPLE: Describe the scene narratively as a cohesive paragraph - NOT as keyword lists. Gemini's strength is deep language understanding. "
+            "Structure your prompt with these elements: "
+            "(1) SUBJECT & INTENT: Define the main subject with hyper-specific details (instead of 'fantasy armor' say 'ornate elven plate armor, etched with silver leaf patterns, with a high collar and pauldrons shaped like falcon wings'). Explain the purpose/context of the image. "
+            "(2) SCENE & ENVIRONMENT: Establish the setting, time of day, atmosphere, and spatial relationships. Use step-by-step layering for complex scenes ('First, create a misty forest at dawn. Then, add a moss-covered stone altar in the foreground. Finally, place a glowing sword on the altar'). "
+            "(3) LIGHTING & MOOD: Specify lighting type (studio softbox, golden hour, Rembrandt lighting, dramatic side lighting), quality, and emotional atmosphere. "
+            "(4) CAMERA & COMPOSITION: Use photographic terms - shot type (wide-angle, macro, close-up portrait), lens details (85mm f/1.4), camera angle (low-angle perspective, bird's eye view), focus behavior (shallow depth of field, bokeh effect). "
+            "(5) STYLE & QUALITY: Define artistic style (photorealistic, oil painting, anime, minimalist), reference specific aesthetics, include resolution cues (high resolution, studio quality). "
+            "(6) TEXT RENDERING (if needed): For text in images, specify exact text in quotes, font style descriptively ('elegant serif calligraphy', 'bold sans-serif'), placement, and language. "
+            "Use 'semantic negative prompts' - describe what you WANT, not what to avoid (say 'an empty, deserted street' instead of 'no cars'). "
+            "Return ONLY the prompt as a flowing, descriptive paragraph under 200 tokens."
+        ),
+
+        "NanaBananaPro-Edit": (
+            "As a Nano Banana Pro image editing specialist, craft precise conversational editing instructions optimized for Gemini 3 Pro Image's advanced mask-free editing capabilities. "
+            "Gemini excels at understanding context and can edit images through natural language without masks or coordinates. "
+            "Structure your editing instruction: "
+            "(1) ELEMENT IDENTIFICATION: Describe the specific element to modify using rich visual descriptors, not coordinates (the vintage wooden bookshelf on the left wall, the woman in the blue floral dress standing near the window). "
+            "(2) EDIT ACTION: Use clear, conversational verbs - add, remove, replace, transform, change, adjust, modify, extend, reduce. Be specific about the transformation. "
+            "(3) DESIRED OUTCOME: Describe the end result in detail with visual specifics (transform the day scene into a cozy evening with warm lamplight casting soft shadows). "
+            "(4) STYLE MATCHING: Ensure edits blend seamlessly - match existing lighting conditions, color palette, artistic style, perspective, and atmosphere. Reference the original's visual qualities. "
+            "(5) PRESERVATION CLAUSE: Explicitly state what must remain unchanged (keep the character's facial features exactly the same, preserve the background architecture, maintain the original composition). "
+            "(6) REFINEMENT NOTES: For iterative editing, use natural follow-ups ('That's great, but make the lighting warmer' or 'Keep everything the same but change the expression to more serious'). "
+            "For LOCALIZED EDITING: Select, refine, and transform specific parts - adjust camera angles, change focus, apply color grading, transform lighting (day to night, add bokeh). "
+            "For MULTI-IMAGE COMPOSITION: When combining elements from multiple images, describe how elements should integrate spatially and stylistically. "
+            "Write as natural, conversational instructions an artist would understand. Under 100 tokens. "
+            "Return ONLY the editing instruction."
+        ),
+
+        "NanaBananaPro-Pro": (
+            "As a Nano Banana Pro professional asset production specialist, create a studio-quality prompt leveraging Gemini 3 Pro Image's advanced capabilities. "
+            "This template is optimized for: professional mockups, marketing assets, infographics, storyboards, and high-fidelity productions up to 4K. "
+            "Structure with professional precision: "
+            "(1) ASSET TYPE & PURPOSE: Define the deliverable type (product mockup, infographic, storyboard panel, logo design, marketing banner) and its intended use. "
+            "(2) SUBJECT SPECIFICATION: Hyper-detailed subject description with exact attributes. For products: materials, colors, branding elements. For characters: detailed physical features for consistency across multiple generations. "
+            "(3) COMPOSITION & LAYOUT: Professional framing - rule of thirds, negative space for text overlay, visual hierarchy. Specify aspect ratio (1:1, 16:9, 9:16, 4:3, 21:9) and resolution (1K, 2K, 4K). "
+            "(4) PROFESSIONAL LIGHTING: Studio-grade lighting setups (three-point softbox, rim lighting, product photography lighting with gradient backgrounds). "
+            "(5) TEXT & TYPOGRAPHY (critical for Nano Banana Pro): Specify exact text in quotes, font style description ('modern minimalist sans-serif', 'elegant script calligraphy'), size hierarchy, placement, and color. For multilingual: specify language. "
+            "(6) BRAND CONSISTENCY: Reference brand colors, style guides, maintain visual identity across assets. For character consistency: include detailed descriptions in every prompt. "
+            "(7) GROUNDING (optional): For real-time data visualization (weather, sports scores, stock charts), mention the data source context. "
+            "For STORYBOARDS: Specify panel layout, shot types (establishing, medium, close-up, POV), and sequential flow. "
+            "For INFOGRAPHICS: Structure information hierarchy, use clear data visualization principles. "
+            "Return ONLY the professional prompt, structured as a clear brief, under 250 tokens."
         )
     }
 
@@ -362,10 +457,16 @@ class GeminiQwenAPI:
                     "HunyuanVideo",
                     "Wan2.1",
                     "FLUX.1-dev",
+                    "FLUX.2-dev",
+                    "FLUX.2-dev-Edit",
+                    "FLUX.2-dev-JSON",
                     "SDXL",
                     "FLUXKontext",
                     "Imagen4",
-                    "GeminiNanaBananaEdit"
+                    "GeminiNanaBananaEdit",
+                    "NanaBananaPro",
+                    "NanaBananaPro-Edit",
+                    "NanaBananaPro-Pro"
                 ], {"default": "Custom"}),
                 "structure_format": ("STRING", {"default": "Return only the prompt text itself. No explanations or formatting.", "multiline": True}),
                 "output_format": ([
@@ -651,10 +752,16 @@ class GeminiClaudeAPI:
                     "HunyuanVideo",
                     "Wan2.1",
                     "FLUX.1-dev",
+                    "FLUX.2-dev",
+                    "FLUX.2-dev-Edit",
+                    "FLUX.2-dev-JSON",
                     "SDXL",
                     "FLUXKontext",
                     "Imagen4",
-                    "GeminiNanaBananaEdit"
+                    "GeminiNanaBananaEdit",
+                    "NanaBananaPro",
+                    "NanaBananaPro-Edit",
+                    "NanaBananaPro-Pro"
                 ], {"default": "Custom"}),
                 "structure_format": ("STRING", {"default": "Return only the prompt text itself. No explanations or formatting.", "multiline": True}),
                 "output_format": ([
@@ -804,10 +911,16 @@ class GeminiLLMAPI:
                     "Custom",
                     "VideoGen",
                     "FLUX.1-dev",
+                    "FLUX.2-dev",
+                    "FLUX.2-dev-Edit",
+                    "FLUX.2-dev-JSON",
                     "SDXL",
                     "FLUXKontext",
                     "Imagen4",
-                    "GeminiNanaBananaEdit"
+                    "GeminiNanaBananaEdit",
+                    "NanaBananaPro",
+                    "NanaBananaPro-Edit",
+                    "NanaBananaPro-Pro"
                 ], {"default": "Custom"}),
                 "structure_format": ("STRING", {"default": "Return only the prompt text itself. No explanations or formatting.", "multiline": True}),
                 "output_format": ([
@@ -964,10 +1077,16 @@ class GeminiOllamaAPI:
                     "Custom",
                     "VideoGen",
                     "FLUX.1-dev",
+                    "FLUX.2-dev",
+                    "FLUX.2-dev-Edit",
+                    "FLUX.2-dev-JSON",
                     "SDXL",
                     "FLUXKontext",
                     "Imagen4",
-                    "GeminiNanaBananaEdit"
+                    "GeminiNanaBananaEdit",
+                    "NanaBananaPro",
+                    "NanaBananaPro-Edit",
+                    "NanaBananaPro-Pro"
                 ], {"default": "Custom"}),
                 "structure_format": ("STRING", {"default": "Return only the prompt text itself. No explanations or formatting.", "multiline": True}),
                 "output_format": ([
